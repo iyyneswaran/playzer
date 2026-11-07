@@ -1,5 +1,6 @@
-export const API_BASE =
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+export const API_BASE = (
+  process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+).replace(/\/+$/, "");
 
 export interface Match {
   id: number;
@@ -297,8 +298,11 @@ export async function createCommentary(
 }
 
 export function getWsUrl(): string {
-  const wsBase =
-    process.env.NEXT_PUBLIC_WS_URL ||
-    API_BASE.replace(/^http/, "ws");
+  if (process.env.NEXT_PUBLIC_WS_URL) {
+    const clean = process.env.NEXT_PUBLIC_WS_URL.replace(/\/+$/, "");
+    return clean.endsWith("/ws") ? clean : `${clean}/ws`;
+  }
+  const cleanBase = API_BASE.replace(/\/+$/, "");
+  const wsBase = cleanBase.replace(/^http:/, "ws:").replace(/^https:/, "wss:");
   return `${wsBase}/ws`;
 }
