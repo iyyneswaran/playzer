@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PLAYZER -- Neo-Brutalist Sports Broadcast Dashboard
+
+A high-performance, real-time sports broadcasting dashboard built with **Next.js (App Router)**, **Tailwind CSS**, and **WebSockets**, designed with an authentic **Neo-Brutalism** aesthetic (high contrast, bold black borders, offset hard drop shadows, sharp typography, zero emojis).
+
+---
+
+## Design System: Neo Brutalism
+
+Directly inspired by the brutalist visual language:
+- **Palette**: Neon Lime (`#D4FF2B`), Electric Violet (`#A855F7`), Crimson Red (`#EF4444`), Cyber Blue (`#3B82F6`), Stark Black & White.
+- **Borders & Shadows**: Heavy 3px solid black borders (`border-3 border-black`) with solid offset black shadows (`shadow-[4px_4px_0px_#000]` and `shadow-[8px_8px_0px_#000]`).
+- **Typography**: Space Grotesk display headings + Space Mono for live scores, timers, and timestamps.
+- **Interactions**: Tactile button press effects (offset shift on active state), animated pulse badges for on-air streaming, marquee live tickers.
+- **Icons & Graphics**: Clean geometric Lucide icons, Lottie vector animations, zero emojis.
+
+---
+
+## Features
+
+- **Real-Time Score & Fixture Streaming**: Live WebSocket subscriptions (`/ws`) stream match score changes and new commentary instantly.
+- **Interactive Match Detail Drawer**: Slide-over sheet with score stepper controls (`- 1 +`) that trigger `PATCH /matches/:id/score`.
+- **Live Commentary Broadcast**: Add commentary events directly from the dashboard (`POST /matches/:id/commentary`) with actor, minute, event type (Goal, Red Card, Yellow Card, etc.), and tags.
+- **Match Creation**: Modal dialog to create new matches across any sport category (Football, Basketball, Cricket, Tennis, etc.).
+- **Live Event Ticker**: Continuous marquee ticker broadcasting scores and commentary headlines.
+- **Filter & Search**: Instant filtering by status (All, Live Now, Scheduled, Finished) and sport categories with live search query.
+- **Responsive Layout**: Designed for mobile, tablet, and desktop viewports.
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### 1. Start the Backend (`sportz-WebSocket`)
 
 ```bash
+cd sportz-WebSocket
+npm install
+# Ensure DATABASE_URL is set in .env
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The backend server runs on `http://localhost:3000` with WebSocket endpoint `ws://localhost:3000/ws`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 2. Start the Frontend (`frontend`)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Open [http://localhost:3001](http://localhost:3001) or [http://localhost:3000](http://localhost:3000) to view the dashboard.
